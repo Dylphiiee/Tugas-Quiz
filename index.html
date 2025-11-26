@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Login Form</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+
+<body>
+  <section>
+    <div class="login-box">
+
+      <form action="javascript:void(0);">
+
+        <h2>Login</h2>
+
+        <!-- Username -->
+        <div class="input-box">
+          <span class="icon"><ion-icon name="person"></ion-icon></span>
+          <input type="text" id="username" required>
+          <label>Username</label>
+        </div>
+
+        <!-- Password -->
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+          <input type="password" id="password" required>
+          <label>Password</label>
+        </div>
+
+
+        <button type="button" id="loginBtn">Login</button>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Ion Icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Login Script -->
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", async function() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const response = await fetch("user.json");
+      const data = await response.json();
+
+      const userFound = data.users.find(
+        user => user.username === username && user.password === password
+      );
+
+      if (userFound) {
+        alert("Login berhasil!");
+        window.location.href = "main.html";
+      } else {
+        alert("Username atau Password salah!");
+      }
+    });
+  </script>
+</body>
+  </html>
